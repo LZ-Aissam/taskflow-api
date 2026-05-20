@@ -3,4 +3,4 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-	return {"message": "TaskFlow API v2"}
+	return {"message": "TaskFlow API v3"}
