@@ -7,4 +7,4 @@ def read_root():
 
 @app.get("/hello")
 def read_hello():
-	return {"message": "Hello, World!"}
+	return {"message": "Hello, World! v2"}
