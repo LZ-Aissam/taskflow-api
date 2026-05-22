@@ -26,9 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger render deploy (develop)
-        run: curl --fail --silent --show-error "$RENDER_DEPLOY_HOOK_DEVELOP"
+        run: curl --fail --silent --show-error "$RENDER_DEPLOY_DEVELOP_HOOK"
         env:
-          RENDER_DEPLOY_HOOK_DEVELOP: ${{ secrets.RENDER_DEPLOY_HOOK_DEVELOP }}
+          RENDER_DEPLOY_DEVELOP_HOOK: ${{ secrets.RENDER_DEPLOY_DEVELOP_HOOK }}
 
   deploy_main:
     needs: test
