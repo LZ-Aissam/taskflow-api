@@ -22,20 +22,20 @@ jobs:
 
   deploy_develop:
     needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger render deploy (develop)
-        run: curl --fail --silent --show-error "$RENDER_DEPLOY_DEVELOP_HOOK"
+        run: curl "$RENDER_DEPLOY_DEVELOP_HOOK"
         env:
           RENDER_DEPLOY_DEVELOP_HOOK: ${{ secrets.RENDER_DEPLOY_DEVELOP_HOOK }}
 
   deploy_main:
     needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Trigger render deploy (main)
-        run: curl --fail --silent --show-error "$RENDER_DEPLOY_HOOK"
+        run: curl "$RENDER_DEPLOY_HOOK"
         env:
           RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
