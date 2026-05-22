@@ -9,26 +9,23 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: pip install pytest ruff
 
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
-      with:
-        python-version: "3.11"
-    
-    - run: pip install -r requirements.txt
-    - run: pip install pytest ruff
-
-    - run: ruff check .
-    - run: pytest
+      - run: ruff check .
+      - run: pytest
   deploy:
-        needs: test
-        if: github.ref == 'refs/heads/main'
-        runs-on: ubuntu-latest
-        steps:
-          
-  name: trigger render deploy
+      needs: test
+      if: github.ref == 'refs/heads/main'
+      runs-on: ubuntu-latest
+      steps:    
+        - name: trigger render deploy
           run: curl "$RENDER_DEPLOY_HOOK"
           env:
             RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
